@@ -7,13 +7,12 @@ const twoSum = (nums, target)=> {
     let output = []
     let map = new Map()
     for(let i = 0;i<nums.length;i++) {
-        let num = nums[i]
-        let counterpart = target-num
-        if(map.has(counterpart)) {
-            output.push(map.get(counterpart),i)
+        if(map.has(target-nums[i])) {
+            output.push(map.get(target-nums[i]))
+            output.push(i)
         }
-        else {
-            map.set(num,i)
+        else{
+            map.set(nums[i],i)
         }
     }
     return output
