@@ -11,7 +11,7 @@ var searchRange = function (nums, target) {
 
   while (right >= left) {
     let mid = Math.floor((right + left) / 2);
-    console.log(mid);
+
     if (nums[mid] === target) {
       hit = mid;
       break;
