@@ -1,17 +1,12 @@
 var canJump = function (nums) {
-    const arr = new Array(nums.length-1).fill(1)
-    const dfs = (index) => {
-        if (arr[index] === 0) return false
-        if (index === nums.length - 1) return true
-        const maxSteps = nums[index]
-        for (let i = 1; i <= maxSteps; i++) {
-            let nextPosition = dfs(index + i)
-            if (!!nextPosition) return true
-        }
-        arr[index] = 0
-        return false
+    let maxIndex = 0
+    for (let i = 0; i < nums.length; i++) {
+        if (i > maxIndex) return false
+        let steps = nums[i]
+
+        maxIndex = Math.max(i + steps, maxIndex)
     }
-    return dfs(0)
+    return true
 };
 
 // doesn't matter what jump length last index is
