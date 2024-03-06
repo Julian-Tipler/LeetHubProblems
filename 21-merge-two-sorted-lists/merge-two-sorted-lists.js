@@ -11,38 +11,20 @@
  * @return {ListNode}
  */
 var mergeTwoLists = function (list1, list2) {
-    // set head equal to the lesser of list1 and list2
-    if (!list1) return list2
-    if (!list2) return list1
+    let newHead = new ListNode(null, null)
+    let curr = newHead
 
-    let main
-    let side
-    let head
-    if (list1.val <= list2.val) {
-        main = list1
-        side = list2
-        head = list1
-    } else {
-        main = list2
-        side = list1
-        head = list2
-    }
-
-    while (main) {
-        // if we have inserted all list two, go to the end of main
-        if (!side) {
-            main = main.next
-        }
-        // side is between main and main.next
-        else if (main.next && main.next.val <= side.val) {
-            main = main.next
+    while (list1 || list2) {
+        if (list2 === null || (list1 && list1.val <= list2.val)) {
+            curr.next = list1
+            list1 = list1.next
         } else {
-            const temp = side.next
-            side.next = main.next
-            main.next = side
-            main = main.next
-            side = temp
+            curr.next = list2
+            list2 = list2.next
         }
+        curr = curr.next
+
     }
-    return head
+    return newHead.next
+
 };
