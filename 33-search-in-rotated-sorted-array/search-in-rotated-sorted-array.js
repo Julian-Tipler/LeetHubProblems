@@ -9,6 +9,9 @@ var search = function (nums, target) {
     while (start<=end) {
         mid = Math.floor((end + start) / 2)
         if (nums[mid] === target) return mid
+        if (nums[start] === target) return start
+        if (nums[end] === target) return end
+
         // left sorted
         if (nums[start] <= nums[mid]) {
             if (nums[start] <= target && target < nums[mid]) {
@@ -30,3 +33,4 @@ var search = function (nums, target) {
 };
 
 [3, 4, 5, 6, 7, 1, 2]
+// Make sure target <= or >= because we want to include the end and start
