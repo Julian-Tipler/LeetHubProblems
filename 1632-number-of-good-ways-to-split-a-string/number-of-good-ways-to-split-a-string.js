@@ -17,7 +17,6 @@ var numSplits = function (s) {
 
     i = 1
     while (i < s.length) {
-        console.log(leftMap.length,rightMap.length)
         if (leftMap.size === rightMap.size) {
             goodSplits++
         }
