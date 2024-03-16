@@ -9,11 +9,10 @@ var findMaxLength = function (nums) {
     let map = {0:0}
     for (let i = 0; i <= nums.length; i++) {
 
-        const existingIndex = map[count]
         // if the count has already been hit
-        if (existingIndex !== undefined) {
-            if (i - existingIndex > champ) {
-                champ = i - existingIndex
+        if (count in map) {
+            if (i - map[count] > champ) {
+                champ = i - map[count]
             }
         }
         // if this is the first time this count has been hit
