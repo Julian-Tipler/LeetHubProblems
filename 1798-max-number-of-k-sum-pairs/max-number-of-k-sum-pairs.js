@@ -21,7 +21,6 @@ var maxOperations = function (nums, k) {
             output++
         }
         else if (key !== target && map.get(target) && map.get(target) >= 1) {
-            console.log("they should land here", key, count, target)
             map.set(key, count - 1)
             map.set(target, map.get(target) - 1)
             output++
