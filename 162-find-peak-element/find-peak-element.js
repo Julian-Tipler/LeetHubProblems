@@ -5,7 +5,6 @@
 var findPeakElement = function (nums, l = 0, r = (nums.length - 1)) {
     if (l === r) return l
     const center = Math.floor((r + l) / 2)
-    console.log(l,center,r)
     if (isPeak(nums[center - 1], nums[center], nums[center + 1])) return center
     else if (nums[center - 1] > nums[center]) {
         return findPeakElement(nums, l, center - 1)
