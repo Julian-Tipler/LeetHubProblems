@@ -1,39 +1,47 @@
-/**
- * @param {string} s
- * @return {string[][]}
- */
-var partition = function (s) {
-    // for loop and run isPalindrome once for each letter
-    function recurse(str) {
-        if (str.length === 1) return [[str]]
-        if (str.length === 0) return [[]]
-        // split s into each possible part  a,bba   ab,ba   abb,a
-        const newCombinations = []
-        for (let i = 1; i <= str.length; i++) {
-            const firstHalf = str.substring(0, i)
-            const secondHalf = str.substring(i, str.length)
-            if (isPalindrome(firstHalf)) {
-                const secondHalfCombinations = recurse(secondHalf)
-                secondHalfCombinations.forEach((secondHalfCombination) => {
-                    newCombinations.push([firstHalf, ...secondHalfCombination])
-                })
-            }
-        }
+const isPalindrome = str => ( str === str.split('').reverse().join('') );
 
-        return newCombinations
+
+var dfs = function(s, partition, result){
+    
+    // Base case:
+    // Empty string must be palindrome
+    if( 0 == s.length ){
+        
+        result.push( [...partition] );
+        return;
     }
-    return recurse(s)
+    
+    
+    // General cases:
+    
+    for( let i = 1; i <= s.length ; i++ ){
+        
+        let prefix = s.substring(0, i);
+        let postfix = s.substring(i);
+        
+        // Current prefix is palindrome, keep trying to make more partition in postfix by DFS
+        if( isPalindrome(prefix) ){
+            
+            partition.push( prefix );
+            
+            dfs( postfix, partition, result);
+            
+            partition.pop();
+        }
+        
+    }
+    return
 };
 
-// a ab
-// aa b
-
-
-function isPalindrome(str) {
-    if (str === str.split("").reverse().join("")) return true
-    return false
-}
-// DFS
-// make helper function "is palindrome"
-
-// Two Pointer?
+var partition = function(s) {
+    
+    // buffer for partition in DFS
+    let partition = [];
+    
+    // final output of palindrome substrings
+    let result = [];
+    
+    dfs(s, partition, result);
+    
+    return result;
+};
