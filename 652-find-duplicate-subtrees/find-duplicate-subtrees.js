@@ -11,21 +11,20 @@
  * @return {TreeNode[]}
  */
 var findDuplicateSubtrees = function (root) {
+    // parse entire tree into an array arr. this will be done in a certain order that will cause there to be repeats of the values.
+    // postorder?
     const set = {}
     const output = []
+    // save string notation for each key of our current tree being built. If we run into the same tree twice return it
+    // start string from scratch when you hit the bottom and add it to the set at each level
     const dfs = (node) => {
         if (!node) return "n"
-        const left = dfs(node.left)
-        const right = dfs(node.right)
-        const nodeString = left + "-" + right + "-" + node.val
-        if (set[nodeString] === true) {
-            output.push(node)
-            set[nodeString] = false
-        }
-        else if (!(nodeString in set)) {
-            set[nodeString] = true
-        }
-        return nodeString
+        const leftString = dfs(node.left)
+        const rightString = dfs(node.right)
+        const currentString = leftString + "." + rightString + "." + node.val
+        if (set[currentString] === 1) output.push(node)
+        set[currentString] = set[currentString] ? set[currentString] + 1 : 1
+        return currentString
     }
     dfs(root)
     return output
