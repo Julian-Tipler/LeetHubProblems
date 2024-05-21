@@ -47,16 +47,17 @@ var serialize = function (root) {
 // would it be more effiecient to sort and use pop()?
 
 var deserialize = function (data) {
+    const reversed = data.reverse()
 
     const dfs = (value) => {
         if (value === null) {
             return null
         }
-        const left = dfs(data.shift())
-        const right = dfs(data.shift())
+        const left = dfs(reversed.pop())
+        const right = dfs(reversed.pop())
         return new TreeNode(value, left, right)
     }
-    return dfs(data.shift())
+    return dfs(reversed.pop())
 };
 
 /**
