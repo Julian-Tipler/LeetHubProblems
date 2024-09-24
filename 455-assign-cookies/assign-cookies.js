@@ -3,9 +3,9 @@
  * @param {number[]} s
  * @return {number}
  */
-var findContentChildren = function (g, s) {
-    const childrenGreed = g.sort((a, b) => b - a) // greatest to least
-    const sortedCookies = s.sort((a, b) => b - a) // greatest to least
+var findContentChildren = function (childrenGreed, sortedCookies) {
+    childrenGreed.sort((a, b) => b - a) // greatest to least
+    sortedCookies.sort((a, b) => b - a) // greatest to least
     let kidsFed = 0
 
     // TODO keep track of cookie with largest value
