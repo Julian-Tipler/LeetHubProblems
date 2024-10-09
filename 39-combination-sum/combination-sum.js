@@ -5,8 +5,6 @@
  */
 // space optimize with pointers?
 var combinationSum = function (candidates, target) {
-    candidates.sort((a, b) => b - a) //greatest to least
-
     const output = []
     const currArray = []
     const dfs = (remaining, index) => {
