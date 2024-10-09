@@ -8,18 +8,19 @@ var combinationSum = function (candidates, target) {
     candidates.sort((a, b) => b - a) //greatest to least
 
     const output = []
-    const dfs = (currArray, remaining, index) => {
+    const currArray = []
+    const dfs = (remaining, index) => {
         if (remaining === 0) {
             output.push([...currArray])
         }
         if (remaining < 0) return
         for (let i = index; i < candidates.length; i++) {
             currArray.push(candidates[i])
-            dfs(currArray, remaining - candidates[i], i)
+            dfs(remaining - candidates[i], i)
             currArray.pop()
         }
     }
-    dfs([], target, 0)
+    dfs(target, 0)
     return output
 };
 
