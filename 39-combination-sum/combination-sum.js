@@ -14,7 +14,9 @@ var combinationSum = function (candidates, target) {
         }
         if (remaining < 0) return
         for (let i = index; i < candidates.length; i++) {
-            dfs([...currArray, candidates[i]], remaining - candidates[i], i)
+            currArray.push(candidates[i])
+            dfs(currArray, remaining - candidates[i], i)
+            currArray.pop()
         }
     }
     dfs([], target, 0)
